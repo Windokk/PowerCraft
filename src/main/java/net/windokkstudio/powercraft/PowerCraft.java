@@ -11,6 +11,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
+import net.windokkstudio.powercraft.init.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -32,6 +33,13 @@ public class PowerCraft {
         MinecraftForge.EVENT_BUS.register(this);
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 
+
+        PowercraftBlocks.REGISTRY.register(bus);
+
+        PowercraftItems.REGISTRY.register(bus);
+
+        PowercraftFluids.REGISTRY.register(bus);
+        PowercraftFluidTypes.REGISTRY.register(bus);
 
     }
 

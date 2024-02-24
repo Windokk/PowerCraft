@@ -1,0 +1,13 @@
+{
+  "type": "forge:add_features",
+  "biomes": [
+    "cold_ocean",
+    "deep_cold_ocean",
+    "deep_frozen_ocean",
+    "deep_ocean",
+    "desert",
+    "ocean"
+  ],
+  "features": "powercraft:oil_spawning",
+  "step": "lakes"
+}

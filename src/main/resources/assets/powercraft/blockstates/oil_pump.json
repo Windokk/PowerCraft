@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "powercraft:block/oil_pump"
+    },
+    "facing=east": {
+      "model": "powercraft:block/oil_pump",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "powercraft:block/oil_pump",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "powercraft:block/oil_pump",
+      "y": 270
+    }
+  }
+}
