@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "powercraft:block/invisible",
+    "up": "powercraft:block/invisible",
+    "north": "powercraft:block/invisible",
+    "east": "powercraft:block/invisible",
+    "south": "powercraft:block/invisible",
+    "west": "powercraft:block/invisible",
+    "particle": "powercraft:block/invisible"
+  },
+  "render_type": "translucent"
+}

@@ -33,8 +33,9 @@ public class PowerCraft {
         MinecraftForge.EVENT_BUS.register(this);
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 
-
         PowercraftBlocks.REGISTRY.register(bus);
+
+        PowercraftBlockEntities.REGISTRY.register(bus);
 
         PowercraftItems.REGISTRY.register(bus);
 

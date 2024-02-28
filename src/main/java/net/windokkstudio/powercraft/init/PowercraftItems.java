@@ -21,6 +21,7 @@ public class PowercraftItems {
 	public static final RegistryObject<Item> OIL_BUCKET = REGISTRY.register("oil_bucket", () -> new OilItem());
 
 	public static final RegistryObject<Item> OIL_PUMP_ITEM = block(PowercraftBlocks.OIL_PUMP);
+	public static final RegistryObject<Item> OIL_PUMP_COLLISION_ITEM = block(PowercraftBlocks.OIL_PUMP_COLLISION);
 
 	private static RegistryObject<Item> block(RegistryObject<Block> block) {
 		return REGISTRY.register(block.getId().getPath(), () -> new BlockItem(block.get(), new Item.Properties()));
