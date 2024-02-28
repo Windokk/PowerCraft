@@ -104,6 +104,7 @@ public class OilPumpCollisionBlock extends Block implements EntityBlock {
         {
             BlockPos _pos = BlockPos.containing(parent_x, parent_y, parent_z);
             Block.dropResources(world.getBlockState(_pos), world, BlockPos.containing(parent_x, parent_y, parent_z), null);
+            world.getBlockState(_pos).getBlock().destroy(world, _pos, world.getBlockState(_pos));
             world.destroyBlock(_pos, false);
         }
 
