@@ -96,152 +96,141 @@ public class OilPumpBlock extends Block {
     public void setPlacedBy(Level world, BlockPos pos, BlockState blockstate, LivingEntity entity, ItemStack itemstack) {
         super.setPlacedBy(world, pos, blockstate, entity, itemstack);
         List<BlockPos> positions = new ArrayList<>();
+        double startX = pos.getX();
+        double startY = pos.getY();
+        double startZ = pos.getZ();
         switch (blockstate.getValue(FACING)){
             case NORTH -> {
-                //First Collider
-                positions.add(BlockPos.containing(pos.getX(), pos.getY(), pos.getZ() + 1));
-                world.setBlock(BlockPos.containing(pos.getX(), pos.getY(), pos.getZ() + 1), PowercraftBlocks.OIL_PUMP_COLLISION.get().defaultBlockState(), 3);
-                if (!world.isClientSide()) {
-                    BlockPos _bp = BlockPos.containing(pos.getX(), pos.getY(), pos.getZ() + 1);
-                    BlockEntity _blockEntity = world.getBlockEntity(_bp);
-                    BlockState _bs = world.getBlockState(_bp);
-                    if (_blockEntity != null)
-                        _blockEntity.getPersistentData().putDouble("parent_x", pos.getX());
-                    world.sendBlockUpdated(_bp, _bs, _bs, 3);
-                }
-                if (!world.isClientSide()) {
-                    BlockPos _bp = BlockPos.containing(pos.getX(), pos.getY(), pos.getZ() + 1);
-                    BlockEntity _blockEntity = world.getBlockEntity(_bp);
-                    BlockState _bs = world.getBlockState(_bp);
-                    if (_blockEntity != null)
-                        _blockEntity.getPersistentData().putDouble("parent_y", pos.getY());
-                    world.sendBlockUpdated(_bp, _bs, _bs, 3);
-                }
-                if (!world.isClientSide()) {
-                    BlockPos _bp = BlockPos.containing(pos.getX(), pos.getY(), pos.getZ() + 1);
-                    BlockEntity _blockEntity = world.getBlockEntity(_bp);
-                    BlockState _bs = world.getBlockState(_bp);
-                    if (_blockEntity != null)
-                        _blockEntity.getPersistentData().putDouble("parent_z", pos.getZ());
-                    world.sendBlockUpdated(_bp, _bs, _bs, 3);
-                }
 
-                //Second Collider
-                positions.add(BlockPos.containing(pos.getX(), pos.getY(), pos.getZ() + 2));
-                world.setBlock(BlockPos.containing(pos.getX(), pos.getY(), pos.getZ() + 2), PowercraftBlocks.OIL_PUMP_COLLISION.get().defaultBlockState(), 3);
-                if (!world.isClientSide()) {
-                    BlockPos _bp = BlockPos.containing(pos.getX(), pos.getY(), pos.getZ() + 2);
-                    BlockEntity _blockEntity = world.getBlockEntity(_bp);
-                    BlockState _bs = world.getBlockState(_bp);
-                    if (_blockEntity != null)
-                        _blockEntity.getPersistentData().putDouble("parent_x", pos.getX());
-                    world.sendBlockUpdated(_bp, _bs, _bs, 3);
-                }
-                if (!world.isClientSide()) {
-                    BlockPos _bp = BlockPos.containing(pos.getX(), pos.getY(), pos.getZ() + 2);
-                    BlockEntity _blockEntity = world.getBlockEntity(_bp);
-                    BlockState _bs = world.getBlockState(_bp);
-                    if (_blockEntity != null)
-                        _blockEntity.getPersistentData().putDouble("parent_y", pos.getY());
-                    world.sendBlockUpdated(_bp, _bs, _bs, 3);
-                }
-                if (!world.isClientSide()) {
-                    BlockPos _bp = BlockPos.containing(pos.getX(), pos.getY(), pos.getZ() + 2);
-                    BlockEntity _blockEntity = world.getBlockEntity(_bp);
-                    BlockState _bs = world.getBlockState(_bp);
-                    if (_blockEntity != null)
-                        _blockEntity.getPersistentData().putDouble("parent_z", pos.getZ());
-                    world.sendBlockUpdated(_bp, _bs, _bs, 3);
-                }
+                double minX = startX - 2;
+                double maxX = startX + 1;
+                double minY = startY;
+                double maxY = startY + 4;
+                double minZ = startZ - 3;
+                double maxZ = startZ + 2;
 
-                //Third Collider
-                positions.add(BlockPos.containing(pos.getX(), pos.getY(), pos.getZ() - 1 ));
-                world.setBlock(BlockPos.containing(pos.getX(), pos.getY(), pos.getZ() - 1), PowercraftBlocks.OIL_PUMP_COLLISION.get().defaultBlockState(), 3);
-                if (!world.isClientSide()) {
-                    BlockPos _bp = BlockPos.containing(pos.getX(), pos.getY(), pos.getZ() - 1);
-                    BlockEntity _blockEntity = world.getBlockEntity(_bp);
-                    BlockState _bs = world.getBlockState(_bp);
-                    if (_blockEntity != null)
-                        _blockEntity.getPersistentData().putDouble("parent_x", pos.getX());
-                    world.sendBlockUpdated(_bp, _bs, _bs, 3);
+                for (double x = minX; x <= maxX; x++) {
+                    for (double y = minY; y <= maxY; y++) {
+                        for (double z = minZ; z <= maxZ; z++) {
+                            if(x != startX || y != startY || z != startZ){
+                                positions.add(BlockPos.containing(x, y, z));
+                                world.setBlock(BlockPos.containing(x, y, z), PowercraftBlocks.OIL_PUMP_COLLISION.get().defaultBlockState(), 3);
+                                if (!world.isClientSide()) {
+                                    BlockPos _bp = BlockPos.containing(x, y, z);
+                                    BlockEntity _blockEntity = world.getBlockEntity(_bp);
+                                    BlockState _bs = world.getBlockState(_bp);
+                                    if (_blockEntity != null)
+                                        _blockEntity.getPersistentData().putDouble("parent_x", pos.getX());
+                                    world.sendBlockUpdated(_bp, _bs, _bs, 3);
+                                }
+                                if (!world.isClientSide()) {
+                                    BlockPos _bp = BlockPos.containing(x, y, z);
+                                    BlockEntity _blockEntity = world.getBlockEntity(_bp);
+                                    BlockState _bs = world.getBlockState(_bp);
+                                    if (_blockEntity != null)
+                                        _blockEntity.getPersistentData().putDouble("parent_y", pos.getY());
+                                    world.sendBlockUpdated(_bp, _bs, _bs, 3);
+                                }
+                                if (!world.isClientSide()) {
+                                    BlockPos _bp = BlockPos.containing(x, y, z);
+                                    BlockEntity _blockEntity = world.getBlockEntity(_bp);
+                                    BlockState _bs = world.getBlockState(_bp);
+                                    if (_blockEntity != null)
+                                        _blockEntity.getPersistentData().putDouble("parent_z", pos.getZ());
+                                    world.sendBlockUpdated(_bp, _bs, _bs, 3);
+                                }
+                            }
+                        }
+                    }
                 }
-                if (!world.isClientSide()) {
-                    BlockPos _bp = BlockPos.containing(pos.getX(), pos.getY(), pos.getZ() - 1);
-                    BlockEntity _blockEntity = world.getBlockEntity(_bp);
-                    BlockState _bs = world.getBlockState(_bp);
-                    if (_blockEntity != null)
-                        _blockEntity.getPersistentData().putDouble("parent_y", pos.getY());
-                    world.sendBlockUpdated(_bp, _bs, _bs, 3);
-                }
-                if (!world.isClientSide()) {
-                    BlockPos _bp = BlockPos.containing(pos.getX(), pos.getY(), pos.getZ() - 1);
-                    BlockEntity _blockEntity = world.getBlockEntity(_bp);
-                    BlockState _bs = world.getBlockState(_bp);
-                    if (_blockEntity != null)
-                        _blockEntity.getPersistentData().putDouble("parent_z", pos.getZ());
-                    world.sendBlockUpdated(_bp, _bs, _bs, 3);
-                }
-
-                //Fourth Collider
-                positions.add(BlockPos.containing(pos.getX(), pos.getY(), pos.getZ() - 2 ));
-                world.setBlock(BlockPos.containing(pos.getX(), pos.getY(), pos.getZ() - 2), PowercraftBlocks.OIL_PUMP_COLLISION.get().defaultBlockState(), 3);
-                if (!world.isClientSide()) {
-                    BlockPos _bp = BlockPos.containing(pos.getX(), pos.getY(), pos.getZ() - 2);
-                    BlockEntity _blockEntity = world.getBlockEntity(_bp);
-                    BlockState _bs = world.getBlockState(_bp);
-                    if (_blockEntity != null)
-                        _blockEntity.getPersistentData().putDouble("parent_x", pos.getX());
-                    world.sendBlockUpdated(_bp, _bs, _bs, 3);
-                }
-                if (!world.isClientSide()) {
-                    BlockPos _bp = BlockPos.containing(pos.getX(), pos.getY(), pos.getZ() - 2);
-                    BlockEntity _blockEntity = world.getBlockEntity(_bp);
-                    BlockState _bs = world.getBlockState(_bp);
-                    if (_blockEntity != null)
-                        _blockEntity.getPersistentData().putDouble("parent_y", pos.getY());
-                    world.sendBlockUpdated(_bp, _bs, _bs, 3);
-                }
-                if (!world.isClientSide()) {
-                    BlockPos _bp = BlockPos.containing(pos.getX(), pos.getY(), pos.getZ() - 2);
-                    BlockEntity _blockEntity = world.getBlockEntity(_bp);
-                    BlockState _bs = world.getBlockState(_bp);
-                    if (_blockEntity != null)
-                        _blockEntity.getPersistentData().putDouble("parent_z", pos.getZ());
-                    world.sendBlockUpdated(_bp, _bs, _bs, 3);
-                }
-
-                //Fifth Collider
-                positions.add(BlockPos.containing(pos.getX(), pos.getY(), pos.getZ() - 3 ));
-                world.setBlock(BlockPos.containing(pos.getX(), pos.getY(), pos.getZ() - 3), PowercraftBlocks.OIL_PUMP_COLLISION.get().defaultBlockState(), 3);
-                if (!world.isClientSide()) {
-                    BlockPos _bp = BlockPos.containing(pos.getX(), pos.getY(), pos.getZ() - 3);
-                    BlockEntity _blockEntity = world.getBlockEntity(_bp);
-                    BlockState _bs = world.getBlockState(_bp);
-                    if (_blockEntity != null)
-                        _blockEntity.getPersistentData().putDouble("parent_x", pos.getX());
-                    world.sendBlockUpdated(_bp, _bs, _bs, 3);
-                }
-                if (!world.isClientSide()) {
-                    BlockPos _bp = BlockPos.containing(pos.getX(), pos.getY(), pos.getZ() - 3);
-                    BlockEntity _blockEntity = world.getBlockEntity(_bp);
-                    BlockState _bs = world.getBlockState(_bp);
-                    if (_blockEntity != null)
-                        _blockEntity.getPersistentData().putDouble("parent_y", pos.getY());
-                    world.sendBlockUpdated(_bp, _bs, _bs, 3);
-                }
-                if (!world.isClientSide()) {
-                    BlockPos _bp = BlockPos.containing(pos.getX(), pos.getY(), pos.getZ() - 3);
-                    BlockEntity _blockEntity = world.getBlockEntity(_bp);
-                    BlockState _bs = world.getBlockState(_bp);
-                    if (_blockEntity != null)
-                        _blockEntity.getPersistentData().putDouble("parent_z", pos.getZ());
-                    world.sendBlockUpdated(_bp, _bs, _bs, 3);
-                }
-
             }
+            case WEST -> {
+                double minX = startX + 3;
+                double maxX = startX - 2;
+                double minY = startY;
+                double maxY = startY + 4;
+                double minZ = startZ - 1;
+                double maxZ = startZ + 2;
 
-            case WEST -> {System.out.println("WEST");}
-            case SOUTH -> {System.out.println("SOUTH");}
+                for (double x = minX; x <= maxX; x++) {
+                    for (double y = minY; y <= maxY; y++) {
+                        for (double z = maxZ; z <= minZ; z++) {
+                            if(x != startX || y != startY || z != startZ){
+                                positions.add(BlockPos.containing(x, y, z));
+
+                                world.setBlock(BlockPos.containing(x, y, z), PowercraftBlocks.OIL_PUMP_COLLISION.get().defaultBlockState(), 3);
+                                if (!world.isClientSide()) {
+                                    BlockPos _bp = BlockPos.containing(x, y, z);
+                                    BlockEntity _blockEntity = world.getBlockEntity(_bp);
+                                    BlockState _bs = world.getBlockState(_bp);
+                                    if (_blockEntity != null)
+                                        _blockEntity.getPersistentData().putDouble("parent_x", pos.getX());
+                                    world.sendBlockUpdated(_bp, _bs, _bs, 3);
+                                }
+                                if (!world.isClientSide()) {
+                                    BlockPos _bp = BlockPos.containing(x, y, z);
+                                    BlockEntity _blockEntity = world.getBlockEntity(_bp);
+                                    BlockState _bs = world.getBlockState(_bp);
+                                    if (_blockEntity != null)
+                                        _blockEntity.getPersistentData().putDouble("parent_y", pos.getY());
+                                    world.sendBlockUpdated(_bp, _bs, _bs, 3);
+                                }
+                                if (!world.isClientSide()) {
+                                    BlockPos _bp = BlockPos.containing(x, y, z);
+                                    BlockEntity _blockEntity = world.getBlockEntity(_bp);
+                                    BlockState _bs = world.getBlockState(_bp);
+                                    if (_blockEntity != null)
+                                        _blockEntity.getPersistentData().putDouble("parent_z", pos.getZ());
+                                    world.sendBlockUpdated(_bp, _bs, _bs, 3);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            case SOUTH -> {
+                double minX = startX - 1;
+                double maxX = startX + 2;
+                double minY = startY;
+                double maxY = startY + 4;
+                double minZ = startZ + 3;
+                double maxZ = startZ - 2;
+
+                for (double x = minX; x <= maxX; x++) {
+                    for (double y = minY; y <= maxY; y++) {
+                        for (double z = maxZ; z <= minZ; z++) {
+                            if(x != startX || y != startY || z != startZ){
+                                positions.add(BlockPos.containing(x, y, z));
+                                world.setBlock(BlockPos.containing(x, y, z), PowercraftBlocks.OIL_PUMP_COLLISION.get().defaultBlockState(), 3);
+                                if (!world.isClientSide()) {
+                                    BlockPos _bp = BlockPos.containing(x, y, z);
+                                    BlockEntity _blockEntity = world.getBlockEntity(_bp);
+                                    BlockState _bs = world.getBlockState(_bp);
+                                    if (_blockEntity != null)
+                                        _blockEntity.getPersistentData().putDouble("parent_x", pos.getX());
+                                    world.sendBlockUpdated(_bp, _bs, _bs, 3);
+                                }
+                                if (!world.isClientSide()) {
+                                    BlockPos _bp = BlockPos.containing(x, y, z);
+                                    BlockEntity _blockEntity = world.getBlockEntity(_bp);
+                                    BlockState _bs = world.getBlockState(_bp);
+                                    if (_blockEntity != null)
+                                        _blockEntity.getPersistentData().putDouble("parent_y", pos.getY());
+                                    world.sendBlockUpdated(_bp, _bs, _bs, 3);
+                                }
+                                if (!world.isClientSide()) {
+                                    BlockPos _bp = BlockPos.containing(x, y, z);
+                                    BlockEntity _blockEntity = world.getBlockEntity(_bp);
+                                    BlockState _bs = world.getBlockState(_bp);
+                                    if (_blockEntity != null)
+                                        _blockEntity.getPersistentData().putDouble("parent_z", pos.getZ());
+                                    world.sendBlockUpdated(_bp, _bs, _bs, 3);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
             case EAST -> {System.out.println("EAST");}
         }
 
