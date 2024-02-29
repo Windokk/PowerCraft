@@ -14,7 +14,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
-import net.windokkstudio.powercraft.client.OilPumpBlockRenderer;
+import net.windokkstudio.powercraft.client.model.OilPumpBlockRenderer;
 import net.windokkstudio.powercraft.init.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

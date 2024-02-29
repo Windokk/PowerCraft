@@ -1,4 +1,4 @@
-package net.windokkstudio.powercraft.client;
+package net.windokkstudio.powercraft.client.model;
 
 import net.minecraft.resources.ResourceLocation;
 import net.windokkstudio.powercraft.PowerCraft;

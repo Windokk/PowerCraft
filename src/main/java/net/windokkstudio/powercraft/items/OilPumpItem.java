@@ -1,8 +1,10 @@
 package net.windokkstudio.powercraft.items;
 
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import net.windokkstudio.powercraft.client.model.OilPumpItemRenderer;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.SingletonGeoAnimatable;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
@@ -24,16 +26,25 @@ public class OilPumpItem extends BlockItem implements GeoItem {
 
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-        x
+        consumer.accept(new IClientItemExtensions() {
+            private OilPumpItemRenderer renderer;
+            @Override
+            public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                if(this.renderer == null)
+                    this.renderer = new OilPumpItemRenderer();
+
+                return this.renderer;
+            }
+        });
     }
 
     @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "controller", 0, this::predicate));
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+        controllerRegistrar.add(new AnimationController<>(this, "controller", 0, this::predicate));
     }
 
-    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tanimationState) {
-        tanimationState.getController().setAnimation(RawAnimation.begin().then("pumping", Animation.LoopType.LOOP));
+    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
+        tAnimationState.getController().setAnimation(RawAnimation.begin().then("pumping", Animation.LoopType.LOOP));
         return PlayState.CONTINUE;
     }
 

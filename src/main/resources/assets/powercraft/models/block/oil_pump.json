@@ -108,5 +108,8 @@
         0.12
       ]
     }
+  },
+  "textures": {
+    "particle": "powercraft:block/oil_pump"
   }
 }
