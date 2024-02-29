@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "powercraft:block/silver_ore",
+    "up": "powercraft:block/silver_ore",
+    "north": "powercraft:block/silver_ore",
+    "east": "powercraft:block/silver_ore",
+    "south": "powercraft:block/silver_ore",
+    "west": "powercraft:block/silver_ore",
+    "particle": "powercraft:block/silver_ore"
+  },
+  "render_type": "solid"
+}

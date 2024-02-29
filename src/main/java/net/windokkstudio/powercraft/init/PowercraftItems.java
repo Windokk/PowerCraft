@@ -25,6 +25,10 @@ public class PowercraftItems {
 
 	public static final RegistryObject<Item> OIL_PUMP_COLLISION_ITEM = block(PowercraftBlocks.OIL_PUMP_COLLISION);
 
+	public static final RegistryObject<Item> SILVER_ORE = block(PowercraftBlocks.SILVER_ORE);
+	public static final RegistryObject<Item> DEEPSLATE_SILVER_ORE = block(PowercraftBlocks.DEEPSLATE_SILVER_ORE);
+	public static final RegistryObject<Item> LITHIUM_ORE = block(PowercraftBlocks.LITHIUM_ORE);
+
 	private static RegistryObject<Item> block(RegistryObject<Block> block) {
 		return REGISTRY.register(block.getId().getPath(), () -> new BlockItem(block.get(), new Item.Properties()));
 	}

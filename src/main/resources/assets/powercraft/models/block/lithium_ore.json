@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "powercraft:block/lithium_ore",
+    "up": "powercraft:block/lithium_ore",
+    "north": "powercraft:block/lithium_ore",
+    "east": "powercraft:block/lithium_ore",
+    "south": "powercraft:block/lithium_ore",
+    "west": "powercraft:block/lithium_ore",
+    "particle": "powercraft:block/lithium_ore"
+  },
+  "render_type": "solid"
+}
