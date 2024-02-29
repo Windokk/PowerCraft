@@ -27,10 +27,11 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
 
+import net.windokkstudio.powercraft.blocks.entity.OilPumpBlockEntity;
 import net.windokkstudio.powercraft.init.PowercraftBlocks;
+import org.jetbrains.annotations.Nullable;
 
 
-import javax.annotation.Nullable;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -40,7 +41,7 @@ import java.util.Random;
 import static java.lang.System.*;
 
 
-public class OilPumpBlock extends Block {
+public class OilPumpBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     List<BlockPos> positions = new ArrayList<>();
 
@@ -309,6 +310,14 @@ public class OilPumpBlock extends Block {
     }
 
 
+    @Override
+    public RenderShape getRenderShape(BlockState blockState) {
+        return RenderShape.ENTITYBLOCK_ANIMATED;
+    }
 
-
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(BlockPos p_153215_, BlockState p_153216_) {
+        return new OilPumpBlockEntity(p_153215_,p_153216_);
+    }
 }

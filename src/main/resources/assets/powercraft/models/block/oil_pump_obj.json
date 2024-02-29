@@ -1,0 +1,11 @@
+{
+  "parent": "forge:item/default",
+  "loader": "forge:obj",
+  "flip_v": true,
+  "model": "powercraft:models/block/oil_pump.obj",
+  "emissive_ambient": true,
+  "textures": {
+    "particle": "powercraft:block/oil_pump"
+  },
+  "render_type": "solid"
+}

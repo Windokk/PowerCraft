@@ -12,11 +12,14 @@ import net.minecraftforge.registries.DeferredRegister;
 
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.Block;
+import net.windokkstudio.powercraft.blocks.entity.OilPumpBlockEntity;
 import net.windokkstudio.powercraft.blocks.entity.OilPumpCollisionBlockEntity;
 
 public class PowercraftBlockEntities {
 	public static final DeferredRegister<BlockEntityType<?>> REGISTRY = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, PowerCraft.MODID);
 	public static final RegistryObject<BlockEntityType<?>> OIL_PUMP_COLLISION_BLOCK_ENTITY = register("oil_pump_collision", PowercraftBlocks.OIL_PUMP_COLLISION, OilPumpCollisionBlockEntity::new);
+	public static final RegistryObject<BlockEntityType<OilPumpBlockEntity>> OIL_PUMP_BLOCK_ENTITY = REGISTRY.register("oil_pump", () -> BlockEntityType.Builder.of(OilPumpBlockEntity::new, PowercraftBlocks.OIL_PUMP.get()).build(null));
+
 
 	private static RegistryObject<BlockEntityType<?>> register(String registryname, RegistryObject<Block> block, BlockEntityType.BlockEntitySupplier<?> supplier) {
 		return REGISTRY.register(registryname, () -> BlockEntityType.Builder.of(supplier, block.get()).build(null));

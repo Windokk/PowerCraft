@@ -1,19 +1,24 @@
 package net.windokkstudio.powercraft;
 
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
+import net.windokkstudio.powercraft.client.OilPumpBlockRenderer;
 import net.windokkstudio.powercraft.init.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import software.bernie.geckolib.GeckoLib;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
@@ -24,14 +29,17 @@ import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+
 @Mod("powercraft")
-public class PowerCraft {
+public class PowerCraft{
     public static final Logger LOGGER = LogManager.getLogger(PowerCraft.class);
     public static final String MODID = "powercraft";
 
     public PowerCraft() {
         MinecraftForge.EVENT_BUS.register(this);
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        GeckoLib.initialize();
 
         PowercraftBlocks.REGISTRY.register(bus);
 
@@ -70,6 +78,14 @@ public class PowerCraft {
             });
             actions.forEach(e -> e.getKey().run());
             workQueue.removeAll(actions);
+        }
+    }
+
+    @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    public static class ClientModEvents{
+        @SubscribeEvent
+        public static void onClientSetup(FMLClientSetupEvent event){
+            BlockEntityRenderers.register(PowercraftBlockEntities.OIL_PUMP_BLOCK_ENTITY.get(), OilPumpBlockRenderer::new);
         }
     }
 }
